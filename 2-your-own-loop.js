@@ -1,6 +1,5 @@
 let start;
 function loop1() {
-  start = Date.now();
   end = 100000;
   end2 = end;
   let numList = [];
@@ -23,8 +22,12 @@ function loop1() {
   function loop(num, one, two, three) {
 
     for (one; two; index++) {
-      const element = array[index];
 
     }
 
   }
+
+//   loop(3, n => n > 0, n => n - 1, console.log);
+// → 3
+// → 2
+// → 1
