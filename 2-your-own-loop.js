@@ -19,15 +19,22 @@ function loop1() {
 
 
 
-  function loop(num, one, two, three) {
+  function loop(num, check, update, log) {
 
-    for (one; two; index++) {
-
+    for (let n = num; 
+      check(num); 
+      update(num)
+      ) {
+      console.log(n);
     }
+
+
+
+
 
   }
 
-//   loop(3, n => n > 0, n => n - 1, console.log);
+loop(3, n => n > 0, n => n - 1, console.log);
 // → 3
 // → 2
 // → 1
