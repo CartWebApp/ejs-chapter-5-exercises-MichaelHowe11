@@ -1,6 +1,10 @@
 function every(array, test) {
-    // Your code here.
+sum = 0;
+  for (let i = 0; i < array.length; i++) {
+    sum = array[i] + array[i-1];
   }
+  return(test(sum))
+}
   
   console.log(every([1, 3, 5], n => n < 10));
   // → true

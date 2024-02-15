@@ -22,10 +22,12 @@ function loop1() {
   function loop(num, check, update, log) {
 
     for (let n = num; 
-      check(num); 
-      update(num)
-      ) {
-      console.log(n);
+      check(n);
+      n = update(n)
+      ) 
+      
+      {
+        log(n)
     }
 
 
