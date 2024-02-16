@@ -2,9 +2,6 @@ const SCRIPTS = require('./includes/scripts.js');
 
 require('./includes/scripts.js') // include the scripts used by the chapter
 
-function dominantDirection(text) {
-    // Your code here.
-  }
   
 
   function characterScript(code) {
