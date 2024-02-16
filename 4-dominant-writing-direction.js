@@ -1,3 +1,5 @@
+const SCRIPTS = require('./includes/scripts.js');
+
 require('./includes/scripts.js') // include the scripts used by the chapter
 
 function dominantDirection(text) {
@@ -28,48 +30,80 @@ function dominantDirection(text) {
     }
     return counts;
   }
-  function textScripts(text) {
+  function dominantDirection(text) {
     let scripts = countBy(text, char => {
       let script = characterScript(char.codePointAt(0));
       return script ? script.name : "none";
     }).filter(({name}) => name != "none");
   
+    writingDirection2 = 0;
+
     let total = scripts.reduce((n, {count}) => n + count, 0);
     if (total == 0) return "No scripts found";
-  
-    return scripts.map(({name, count}) => {
-      console.log(name);
-      console.log(count * 100 / total);
-      console.log(total);
+    scripts.map(({name, count}) => {
+
+
+      let writingDirection = 0;
+      let rtlList = [];
+      let ltrList = [];
+      let ttbList = [];
+
+      let rtlCount = 0;
+      let ltrCount = 0;
+      let ttbCount = 0;
 
       for (let i = 0; i < SCRIPTS.length; i++) {
-        let rtlList = [];
-        let ltrList = [];
-        let ttbList = [];
-        if (SCRIPTS[i].direction === "rtl") {
-          SCRIPTS[i] = rtlList;
-          
-        } else if (SCRIPTS[i].direction === "ltr"){
-          SCRIPTS[i] = ltrList;
-        } else {
-          SCRIPTS[i] = ttbList;
 
+
+        if (SCRIPTS[i].direction === "rtl") {
+          rtlList.push(SCRIPTS[i].name)
+        } else if (SCRIPTS[i].direction === "ltr"){
+          ltrList.push(SCRIPTS[i].name)
+        } else {
+          ttbList.push(SCRIPTS[i].name)
         }
 
-        for (let i = 0; i < rtlList.length; i++) {
-          if (name === rtlList[i]) {
-            count * 100 / total;
+        
+        for (let e = 0; e < rtlList.length + ltrList.length + ttbList.length; e++) {
+          if (name === rtlList[e]) {
+            rtlCount = rtlCount + count;
+          }
+          if (name === ltrList[e]) {
+            ltrCount = ltrCount + count;
+          }
+          if (name === ttbList[e]) {
+            ttbCount = ttbCount + count;
           }
           
         }
+
+
       }
 
+      if (ltrCount > rtlCount) {
+        writingDirection = 0;
 
-      return `${Math.round(count * 100 / total)}% ${name}`;
-    }).join(", ");
+      } else if (rtlCount > ltrCount) {
+        writingDirection = 1;
+      } else {
+        writingDirection = 2;
+      }
+writingDirection2 = writingDirection;
+
+    });
+
+    if (writingDirection2 === 0) {
+      writingDirection2 = "ltr";
+    } else if (writingDirection2 === 1) {
+      writingDirection2 = "rtl";
+    } else {
+      writingDirection2 = "ttb";
+    }
+
+    return(writingDirection2);
+
   }
 
-  console.log(textScripts("Hey, مساء الخير"));
 
   console.log(dominantDirection("Hello!"));
   // → ltr
