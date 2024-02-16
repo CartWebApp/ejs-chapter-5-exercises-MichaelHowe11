@@ -1,16 +1,9 @@
 
 function loop(num, check, update, log) {
 
-  for (let n = num;
-    check(n);
-    n = update(n)
-  ) {
+  for (let n = num; check(n); n = update(n)) {
     log(n)
   }
-
-
-
-
 
 }
 
